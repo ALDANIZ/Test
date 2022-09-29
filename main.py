@@ -86,6 +86,9 @@ def Extract_Character(crop_mrz):
 
     if not check:
         print("Your MRZ code is not valid!")
+
+        return False
+
     else:
         fields = check.fields()
 
@@ -193,10 +196,11 @@ def predict():
                         response_dict['SUCCESS'] = True
                         response_dict['MRZ_Count'] = 1
                         response_dict['HEADSHOT_Count'] = 1
-                        response_dict['MRZ_Data'] = crop_mrz_ocr
                         response_dict['HEADSHOT_Img'] = im_b64
 
-                        pass
+                        if  crop_mrz_ocr:
+                            response_dict['MRZ_Data'] = crop_mrz_ocr
+                            pass
 
                     else:
 
@@ -270,8 +274,3 @@ def predict():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=False)
-
-
-
-
-
